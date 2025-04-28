@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SETXB99 - تسجيل الدخول</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Cairo', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      background: #0a0f2e;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    #particles-js { position: absolute; width: 100%; height: 100%; z-index: 0; }
+    .login-box, .welcome-box, .third-box {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 140, 255, 0.4);
+      text-align: center;
+      width: 320px;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInBox 1.5s ease;
+    }
+    @keyframes fadeInBox {
+      from { opacity: 0; transform: translateY(-50px) scale(0.9);}
+      to { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    .login-box h2, .welcome-box h1, .third-box h2 {
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 32px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00c3ff, 0 0 20px #0077ff;
+      font-family: 'Cairo', sans-serif;
+    }
+    .welcome-message {
+      margin-top: 20px;
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: #00e1ff;
+      text-shadow: 0 0 8px #00e1ff;
+      animation: pulseText 2s infinite;
+    }
+    @keyframes pulseText {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+    .login-box input, .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      transition: background 0.3s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'Cairo', sans-serif;
+    }
+    .login-box input {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+    .login-box input::placeholder { color: #ddd; }
+    .login-box button {
+      background: linear-gradient(45deg, #007bff, #00d4ff);
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .login-box button:hover {
+      background: linear-gradient(45deg, #0056b3, #00aaff);
+    }
+    .error-message {
+      color: #ff4d4d;
+      margin-top: 10px;
+      font-size: 16px;
+      display: none;
+      transition: opacity 0.5s;
+    }
+    .developer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #00d0ff;
+      text-shadow: 0 0 8px #00c3ff, 0 0 15px #0077ff;
+      animation: pulse 2s infinite;
+    }
+    .progress-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+      display: none;
+    }
+    .progress-bar {
+      height: 12px;
+      background: linear-gradient(45deg, #00c3ff, #007bff);
+      width: 0%;
+      transition: width 0.1s;
+    }
+    .welcome-progress {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      height: 12px;
+    }
+    .welcome-bar {
+      height: 100%;
+      background: linear-gradient(45deg, #00ffea, #007bff);
+      width: 0%;
+      transition: width 0.1s;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #00c3ff;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      text-shadow: 0 0 5px #00c3ff;
+    }
+    .social-links {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .social-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1877F2;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .social-link:hover {
+      background-color: #156db8;
+    }
+    .social-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    /* لوحة تحكم الألوان */
+    .color-control {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 15px;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+    .color-control label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #00e1ff;
+    }
+    .color-control input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<!-- لوحة تحكم الألوان -->
+<div class="color-control">
+  <label>BACK GROUND COLOR:</label>
+  <input type="color" id="bgColorPicker">
+  <label>TEXT COLOR:</label>
+  <input type="color" id="textColorPicker">
+</div>
+
+<div class="login-box" id="loginBox">
+  <h2>SETXB99</h2>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="USERNAME" required>
+    <input type="password" id="password" placeholder="PASSOWRD" required>
+    <button type="submit">دخول</button>
+    <div id="error" class="error-message">⚠️ ERROR PASS OR USER .</div>
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </form>
+  <div class="developer">By: Developer FARES ZAAMOUKI⚙️🔥</div>
+</div>
+
+<div class="welcome-box" id="welcomeBox" style="display: none;">
+  <h1>Welcome</h1>
+  <div class="welcome-message">بما أنك سجلت الدخول في الموقع، أتمنى أن تدعو لي أن يوفقني الله في مسيرتي الدراسية</div>
+  <div class="welcome-progress">
+    <div class="welcome-bar" id="welcomeBar"></div>
+  </div>
+</div>
+
+<div class="third-box" id="thirdBox" style="display: none;">
+  <h2>  جدول </h2>
+  <table>
+    <tr>
+      <th>قسم 1:ستتم اضافة محتوى القسم قريبا</th>
+      <th>قسم 2: ستتم اضافة محتوى القسم قريبا</th>
+    </tr>
+    <tr>
+      <th>قسم رقم 3 : ستتم اضافة محتوى القسم قريبا</th>
+      <th>قسم 4:ستتم اضافة محتوى القسم قريبا</th>
+    </tr>
+  </table>
+
+  <div class="social-links">
+    <!-- رابط فيسبوك -->
+    <a href="https://www.facebook.com/FaresZaamouki17" target="_blank" class="social-link">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="فيسبوك" class="social-icon">
+      <span>FARES ZAAMOUKI</span>
+    </a>
+
+    <!-- رابط انستغرام -->
+    <a href="https://www.instagram.com/seh_9i" target="_blank" class="social-link" style="background-color: #E4405F; margin-top: 10px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="انستغرام" class="social-icon">
+      <span>seh_9i</span>
+    </a>
+  </div>
+</div>
+
+<audio id="successSound">
+  <source src="https://media.vocaroo.com/mp3/1jgJbZJsaSQH" type="audio/mp3">
+</audio>
+
+<audio id="errorSound">
+  <source src="https://media.vocaroo.com/mp3/1gyBecind9ZK" type="audio/mp3">
+</audio>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+// particles.js
+particlesJS('particles-js', {
+  "particles": {
+    "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": "#00c3ff" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.3, "random": true },
+    "size": { "value": 5, "random": true },
+    "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
+  },
+  "interactivity": {
+    "events": { "onhover": { "enable": true, "mode": "repulse" } }
+  },
+  "retina_detect": true
+});
+
+// تسجيل الدخول
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  var username = document.getElementById("username").value.trim();
+  var password = document.getElementById("password").value.trim();
+  var errorDiv = document.getElementById("error");
+  var progressContainer = document.getElementById("progressContainer");
+  var progressBar = document.getElementById("progressBar");
+  var successSound = document.getElementById("successSound");
+  var errorSound = document.getElementById("errorSound");
+
+  if (username !== "fares.dev" || password !== "zaamouki") {
+    errorDiv.style.display = "block";
+    progressContainer.style.display = "none";
+    errorSound.currentTime = 0;
+    errorSound.play();
+  } else {
+    errorDiv.style.display = "none";
+    progressContainer.style.display = "block";
+    progressBar.style.width = "0%";
+    successSound.currentTime = 0;
+    successSound.play();
+
+    let progress = 0;
+    let interval = setInterval(function() {
+      progress += 2;
+      progressBar.style.width = progress + "%";
+      if (progress >= 100) {
+        clearInterval(interval);
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("welcomeBox").style.display = "block";
+
+        let welcomeProgress = 0;
+        let welcomeInterval = setInterval(function() {
+          welcomeProgress += 1;
+          document.getElementById("welcomeBar").style.width = welcomeProgress + "%";
+          if (welcomeProgress >= 100) {
+            clearInterval(welcomeInterval);
+            document.getElementById("welcomeBox").style.display = "none";
+            document.getElementById("thirdBox").style.display = "block";
+          }
+        }, 80);
+      }
+    }, 100);
+  }
+});
+
+// لوحة تحكم الألوان
+document.getElementById("bgColorPicker").addEventListener("input", function() {
+  document.body.style.background = this.value;
+});
+document.getElementById("textColorPicker").addEventListener("input", function() {
+  document.body.style.color = this.value;
+});
+</script>
+
+</body>
+</html>
