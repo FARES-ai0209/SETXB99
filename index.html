@@ -1,288 +1,673 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SETXB99 - تسجيل الدخول</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
   <style>
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
+
       font-family: -apple-system, BlinkMacSystemFont, 'Cairo', sans-serif;
+
       height: 100vh;
+
       overflow: hidden;
+
       background: #0a0f2e;
+
       position: relative;
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       color: white;
+
     }
+
     #particles-js {
+
       position: absolute;
+
       width: 100%;
+
       height: 100%;
+
       z-index: 0;
+
     }
+
     .login-box, .welcome-box, .third-box {
+
       background: rgba(255, 255, 255, 0.08);
+
       padding: 40px;
+
       border-radius: 20px;
+
       box-shadow: 0 0 30px rgba(0, 140, 255, 0.4);
+
       text-align: center;
+
       width: 320px;
+
       position: relative;
+
       z-index: 2;
+
       backdrop-filter: blur(15px);
+
       border: 1px solid rgba(255, 255, 255, 0.2);
+
       animation: fadeInBox 1.5s ease;
+
     }
+
     @keyframes fadeInBox {
+
       from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+
       to { opacity: 1; transform: translateY(0) scale(1); }
+
     }
+
     .login-box h2, .welcome-box h1, .third-box h2 {
+
       margin-bottom: 30px;
+
       font-weight: bold;
+
       font-size: 32px;
+
       color: #ffffff;
+
       text-shadow: 0 0 10px #00c3ff, 0 0 20px #0077ff;
+
       font-family: 'Cairo', sans-serif;
+
     }
+
     .welcome-message {
+
       margin-top: 20px;
+
       font-family: 'Amiri', serif;
+
       font-size: 18px;
+
       color: #00e1ff;
+
       text-shadow: 0 0 8px #00e1ff;
+
       animation: pulseText 2s infinite;
+
     }
+
     @keyframes pulseText {
+
       0%, 100% { transform: scale(1); opacity: 1; }
+
       50% { transform: scale(1.05); opacity: 0.8; }
+
     }
+
     .login-box input, .login-box button {
+
       width: 100%;
+
       padding: 12px;
+
       margin: 12px 0;
+
       border: none;
+
       border-radius: 12px;
+
       font-size: 16px;
+
       outline: none;
+
       transition: background 0.3s ease;
+
     }
+
     .login-box input {
+
       background: rgba(255, 255, 255, 0.15);
+
       color: white;
+
     }
+
     .login-box input::placeholder { color: #ddd; }
+
     .login-box button {
+
       background: linear-gradient(45deg, #007bff, #00d4ff);
+
       color: white;
+
       cursor: pointer;
+
       font-size: 18px;
-      transition: transform 0.2s ease;
+
     }
+
     .login-box button:hover {
+
       background: linear-gradient(45deg, #0056b3, #00aaff);
+
     }
-    .login-box button:active {
-      transform: scale(0.95);
-    }
+
     .error-message {
+
       color: #ff4d4d;
+
       margin-top: 10px;
+
       font-size: 16px;
+
       display: none;
+
       transition: opacity 0.5s;
+
     }
+
     .developer {
+
       margin-top: 20px;
+
       font-size: 14px;
+
       color: #00d0ff;
+
       text-shadow: 0 0 8px #00c3ff, 0 0 15px #0077ff;
+
       animation: pulse 2s infinite;
+
     }
-    .welcome-box button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 12px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .welcome-box button:active {
-      transform: scale(0.95);
-    }
-    .color-control {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 20px;
-      border-radius: 15px;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-    }
-    .color-control label {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #00e1ff;
-    }
-    .color-control input { width: 100%; margin-bottom: 10px; }
-    table {
+
+    .progress-container {
+
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #00c3ff;
-      padding: 10px;
-      text-align: center;
-      font-size: 18px;
-      text-shadow: 0 0 5px #00c3ff;
-    }
-    .social-links {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .social-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #1877F2;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 10px 20px;
+
+      background: rgba(255, 255, 255, 0.1);
+
       border-radius: 10px;
+
+      overflow: hidden;
+
+      margin-top: 20px;
+
+      display: none;
+
+    }
+
+    .progress-bar {
+
+      height: 12px;
+
+      background: linear-gradient(45deg, #00c3ff, #007bff);
+
+      width: 0%;
+
+      transition: width 0.1s;
+
+    }
+
+    .welcome-progress {
+
+      margin-top: 20px;
+
+      background: rgba(255, 255, 255, 0.2);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      width: 100%;
+
+      height: 12px;
+
+    }
+
+    .welcome-bar {
+
+      height: 100%;
+
+      background: linear-gradient(45deg, #00ffea, #007bff);
+
+      width: 0%;
+
+      transition: width 0.1s;
+
+    }
+
+    .color-control {
+
+      position: absolute;
+
+      top: 20px;
+
+      left: 20px;
+
+      background: rgba(255, 255, 255, 0.1);
+
+      padding: 10px 20px;
+
+      border-radius: 15px;
+
+      z-index: 10;
+
+      backdrop-filter: blur(10px);
+
+    }
+
+    .color-control label {
+
+      display: block;
+
+      margin-bottom: 10px;
+
+      font-size: 16px;
+
+      color: #00e1ff;
+
+    }
+
+    .color-control input {
+
+      width: 100%;
+
+      margin-bottom: 10px;
+
+    }
+
+    table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-top: 20px;
+
+    }
+
+    th, td {
+
+      border: 1px solid #00c3ff;
+
+      padding: 10px;
+
+      text-align: center;
+
+      font-size: 18px;
+
+      text-shadow: 0 0 5px #00c3ff;
+
+    }
+
+    .social-links {
+
+      margin-top: 20px;
+
+      text-align: center;
+
+    }
+
+    .social-link {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      background-color: #1877F2;
+
+      color: white;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      padding: 10px 20px;
+
+      border-radius: 10px;
+
       text-decoration: none;
+
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease;
+
     }
-    .social-link:hover { background-color: #156db8; }
-    .social-link:active { transform: scale(0.95); }
+
+    .social-link:hover {
+
+      background-color: #156db8;
+
+    }
+
     .social-icon {
+
       width: 24px;
+
       height: 24px;
+
       margin-right: 10px;
-      transition: transform 0.2s ease;
+
     }
-    .social-link:active .social-icon {
-      transform: scale(1.1);
-    }
+
   </style>
+
 </head>
+
 <body>
+
+
 
 <div id="particles-js"></div>
 
+
+
 <!-- لوحة تحكم الألوان والصوت -->
+
 <div class="color-control">
+
   <label>لون الخلفية:</label>
-  <input type="color" id="bgColorPicker" value="#0a0f2e">
+
+  <input type="color" id="bgColorPicker" value="#000000">
+
   <label>لون النص:</label>
+
   <input type="color" id="textColorPicker" value="#ffffff">
+
   <label>لون الجزيئات:</label>
+
   <input type="color" id="particlesColorPicker" value="#00c3ff">
+
   <label>مستوى الصوت:</label>
+
   <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.1">
+
 </div>
+
+
 
 <!-- أصوات -->
+
 <audio id="bgMusic" loop autoplay>
-  <source src="mousic17.mp3" type="audio/mp3">
+
+  <source src="mousic18.mp3" type="audio/mp3">
+
   متصفحك لا يدعم تشغيل الصوت.
+
 </audio>
+
 <audio id="successSound"><source src="https://media.vocaroo.com/mp3/1jgJbZJsaSQH" type="audio/mp3"></audio>
+
 <audio id="errorSound"><source src="https://media.vocaroo.com/mp3/1gyBecind9ZK" type="audio/mp3"></audio>
 
+
+
 <!-- واجهة تسجيل الدخول -->
+
 <div class="login-box" id="loginBox">
+
   <h2>SETXB99</h2>
+
   <form id="loginForm">
+
     <input type="text" id="username" placeholder="USERNAME" required>
+
     <input type="password" id="password" placeholder="PASSOWRD" required>
+
     <button type="submit">دخول</button>
+
     <div id="error" class="error-message">⚠️ ERROR PASS OR USER .</div>
+
   </form>
+
   <div class="developer">By: Developer FARES ZAAMOUKI⚙️🔥</div>
+
 </div>
+
+
 
 <!-- واجهة الترحيب -->
+
 <div class="welcome-box" id="welcomeBox" style="display: none;">
+
   <h1>Welcome</h1>
+
   <div class="welcome-message">اذا اعجبك الموقع واستفدت منه، لا تنسني بدعائك بالتوفيق في الدراسة</div>
-  <div class="welcome-progress"><div class="welcome-bar" id="welcomeBar"></div></div>
-  <button onclick="skipWelcome()">تخطي</button>
+
+  <div class="welcome-progress">
+
+    <div class="welcome-bar" id="welcomeBar"></div>
+
+  </div>
+
+  <button onclick="skipWelcome()" style="background:  #C0C0C0; color: white; font-size: 18px; padding: 15px 30px; border-radius: 30px; border: none; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: all 0.3s ease;">تخطي</button>
+
 </div>
+
+
 
 <!-- واجهة الجدول -->
+
 <div class="third-box" id="thirdBox" style="display: none;">
-  <h2> جدول </h2>
-  <table>
-    <tr><th>قسم 1: ستتم إضافة محتوى القسم قريباً</th><th>قسم 2: ستتم إضافة محتوى القسم قريباً</th></tr>
-    <tr><th>قسم رقم 3: ستتم إضافة محتوى القسم قريباً</th><th>قسم 4:<br><img src="455.jpeg" alt="خطأ في تحميل الصورة" style="width:100%;max-width:200px;border-radius:10px;margin-top:10px;"></th></tr>
-  </table>
+
+  <h2> اساتذة قد يفيدوك للمراجعة اضغط على الصورة ليتم توجيهك الى القناة مباشرة </h2>
+
+<<table>
+
+  <tr>
+
+    <th>استاذ مادة العلوم :<br>
+
+      <a href="https://www.youtube.com/@profdibmohamedbachir" target="_blank" style="display:inline-block;">
+
+        <img src="1111.JPEG" alt="قسم 1" style="width:100%;max-width:200px;border-radius:10px;margin-top:10px;cursor:pointer;">
+
+      </a>
+
+    </th>
+
+    <th>استاذ مادة الرياضيات :<br>
+
+      <a href="https://www.youtube.com/@salimmokhtara" target="_blank" style="display:inline-block;">
+
+        <img src="2222.JPEG" alt="قسم 2" style="width:100%;max-width:200px;border-radius:10px;margin-top:10px;cursor:pointer;">
+
+      </a>
+
+    </th>
+
+  </tr>
+
+  <tr>
+
+    <th>استاذ مادة العربية :<br>
+
+      <a href="https://www.youtube.com/@mabrouk_boubaker" target="_blank" style="display:inline-block;">
+
+        <img src="3333.JPEG" alt="قسم 3" style="width:100%;max-width:200px;border-radius:10px;margin-top:10px;cursor:pointer;">
+
+      </a>
+
+    </th>
+
+    <th>استاذ مادة الفيزياء :<br>
+
+      <a href="https://www.youtube.com/@abdelatif_phyDZ" target="_blank" style="display:inline-block;">
+
+        <img src="455.jpeg" alt="قسم 4" style="width:100%;max-width:200px;border-radius:10px;margin-top:10px;cursor:pointer;">
+
+      </a>
+
+    </th>
+
+  </tr>
+
+</table>
+
   <div class="social-links">
+
     <a href="https://www.facebook.com/FaresZaamouki17" target="_blank" class="social-link">
+
       <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="social-icon" alt="فيسبوك"><span>FARES ZAAMOUKI</span>
+
     </a>
+
     <a href="https://www.instagram.com/seh_9i" target="_blank" class="social-link" style="background-color:#E4405F;margin-top:10px;">
+
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="social-icon" alt="انستغرام"><span>seh_9i</span>
+
     </a>
+
   </div>
+
 </div>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
 <script>
+
 // إعداد الجسيمات
+
 particlesJS('particles-js', {
+
   particles: { number:{value:100,density:{enable:true,value_area:800}}, color:{value:"#00c3ff"}, shape:{type:"circle"}, opacity:{value:0.4,random:true,anim:{enable:true,speed:0.6,opacity_min:0.1}}, size:{value:4,random:true,anim:{enable:true,speed:5,size_min:0.5}}, move:{enable:true,speed:2,direction:"bottom",out_mode:"out"}},
+
   interactivity: { events:{onhover:{enable:true,mode:"bubble"}}, modes:{bubble:{distance:150,size:6,duration:2,opacity:0.8,speed:3}} },
+
   retina_detect: true
+
 });
+
+
 
 const bgMusic = document.getElementById("bgMusic");
+
 const volumeSlider = document.getElementById("volumeControl");
+
 const bgColorPicker = document.getElementById("bgColorPicker");
+
 const textColorPicker = document.getElementById("textColorPicker");
+
 const particlesColorPicker = document.getElementById("particlesColorPicker");
+
 const successSound = document.getElementById("successSound");
+
 const errorSound = document.getElementById("errorSound");
 
+
+
 // ضبط الصوت الابتدائي
+
 bgMusic.volume = parseFloat(volumeSlider.value);
+
 // محاولة تشغيل الموسيقى عند أول تفاعل
+
 function initAudio() { bgMusic.play().catch(e=>{}); document.removeEventListener("click", initAudio); }
+
 document.addEventListener("click", initAudio);
 
+
+
 // تحكم بمستوى الصوت
+
 volumeSlider.addEventListener("input", () => bgMusic.volume = parseFloat(volumeSlider.value));
 
+
+
 // تحكم بالألوان
+
 bgColorPicker.addEventListener("input", e => document.body.style.backgroundColor = e.target.value);
+
 textColorPicker.addEventListener("input", e => document.body.style.color = e.target.value);
+
 particlesColorPicker.addEventListener("input", e => {
-  if (window.pJSDom && pJSDom.length) { pJSDom[0].pJS.particles.color.value = e.target.value; pJSDom[0].pJS.fn.particlesRefresh(); }
+
+  if (window.pJSDom && pJSDom.length) {
+
+    pJSDom[0].pJS.particles.color.value = e.target.value;
+
+    pJSDom[0].pJS.fn.particlesRefresh();
+
+  }
+
 });
+
+
 
 // كتم مؤقت
-function playWithFade(audio) { const prev = bgMusic.volume; bgMusic.volume = 0.01; audio.play(); setTimeout(()=> bgMusic.volume = parseFloat(volumeSlider.value), 1500); }
+
+function playWithFade(audio) {
+
+  const prev = bgMusic.volume; bgMusic.volume = 0.01; audio.play(); setTimeout(()=> bgMusic.volume = parseFloat(volumeSlider.value), 1500);
+
+}
+
 // تخطي الترحيب
+
 function skipWelcome() { document.getElementById("welcomeBox").style.display = "none"; document.getElementById("thirdBox").style.display = "block"; }
 
+
+
 // تسجيل الدخول
+
 document.getElementById("loginForm").addEventListener("submit", function(e) {
+
   e.preventDefault(); const user = document.getElementById("username").value; const pass = document.getElementById("password").value;
-  if (user === "1" && pass === "1") { document.getElementById("loginBox").style.display = "none"; document.getElementById("welcomeBox").style.display = "block"; playWithFade(successSound);
-    let progress = 0; const interval = setInterval(() => { progress += 2; document.getElementById("welcomeBar").style.width = `${progress}%`; if (progress >= 100) { clearInterval(interval); setTimeout(skipWelcome, 500); } }, 100);
-  } else { document.getElementById("error").style.display = "block"; playWithFade(errorSound); }
+
+  if (user === "1" && pass === "1") {
+
+    document.getElementById("loginBox").style.display = "none";
+
+    document.getElementById("welcomeBox").style.display = "block";
+
+    playWithFade(successSound);
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+
+      progress += 2;
+
+      document.getElementById("welcomeBar").style.width = `${progress}%`;
+
+      if (progress >= 100) { clearInterval(interval); setTimeout(skipWelcome, 500); }
+
+    }, 100);
+
+  } else {
+
+    document.getElementById("error").style.display = "block";
+
+    playWithFade(errorSound);
+
+  }
+
 });
+
 </script>
+
 </body>
+
 </html>
